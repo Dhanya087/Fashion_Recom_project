@@ -4,22 +4,23 @@ import pandas as pd
 # Load the dataset
 try:
     df = pd.read_csv('fashion.csv')
+    st.success(" File Loaded successfully.")
 except Exception as e:
     st.error(f"Error loading dataset: {e}")
 
 # Streamlit app
 st.title('Fashion Recommender System')
 
-# Input form with default values
+# Input form
 with st.form(key='input_form'):
-    gender = st.selectbox('Gender', df['gender'].unique(), index=df['gender'].unique().tolist().index('Men'))
-    master_category = st.selectbox('Master Category', df['masterCategory'].unique(), index=df['masterCategory'].unique().tolist().index('Apparel'))
-    sub_category = st.selectbox('Sub Category', df['subCategory'].unique(), index=df['subCategory'].unique().tolist().index('Topwear'))
-    article_type = st.selectbox('Article Type', df['articleType'].unique(), index=df['articleType'].unique().tolist().index('Tshirts'))
-    base_colour = st.selectbox('Base Colour', df['baseColour'].unique(), index=df['baseColour'].unique().tolist().index('Grey'))
-    season = st.selectbox('Season', df['season'].unique(), index=df['season'].unique().tolist().index('Summer'))
-    year = st.number_input('Year', min_value=df['year'].min(), max_value=df['year'].max(), value=2011)
-    usage = st.selectbox('Usage', df['usage'].unique(), index=df['usage'].unique().tolist().index('Sports'))
+    gender = st.selectbox('Gender', df['gender'].unique())
+    master_category = st.selectbox('Master Category', df['masterCategory'].unique())
+    sub_category = st.selectbox('Sub Category', df['subCategory'].unique())
+    article_type = st.selectbox('Article Type', df['articleType'].unique())
+    base_colour = st.selectbox('Base Colour', df['baseColour'].unique())
+    season = st.selectbox('Season', df['season'].unique())
+    year = st.number_input('Year', min_value=df['year'].min(), max_value=df['year'].max(), value=df['year'].max())
+    usage = st.selectbox('Usage', df['usage'].unique())
 
     # Submit button
     submit_button = st.form_submit_button(label='Get Recommendation')
